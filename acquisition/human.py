@@ -5,7 +5,8 @@ from polygonmisc import rotatePolygon, translatePolygon
 
 
 class Human(QtWidgets.QGraphicsItem):
-    BoundingRect = QtCore.QRectF(-20, -10, 40, 20)
+    #BoundingRect = QtCore.QRectF(-20, -10, 40, 20)
+    BoundingRect = QtCore.QRectF(-30, -15, 60, 30)
 
     def __init__(self, id, xPos, yPos, angle):
         super(Human, self).__init__()
@@ -15,7 +16,9 @@ class Human(QtWidgets.QGraphicsItem):
         self.setAngle(angle)
         self.setPos(self.xPos, self.yPos)
         self.setZValue(1)
-        self.colour = QtCore.Qt.blue
+        self.colour = QtCore.Qt.transparent
+        self.pixmap = QtGui.QPixmap("person.png")
+        self.factor = 1.5 #multiplicar tamaño
 
     @classmethod
     def from_json(Human, json_data):
@@ -35,8 +38,8 @@ class Human(QtWidgets.QGraphicsItem):
         return Human.BoundingRect
 
     def polygon(self):
-        w = 20
-        h = 10
+        w = 20 *self.factor
+        h = 10 *self.factor
         polygon = QtGui.QPolygon()
         polygon.append( QtCore.QPoint(-w, -h) )
         polygon.append( QtCore.QPoint(-w, +h) )
@@ -48,15 +51,18 @@ class Human(QtWidgets.QGraphicsItem):
         return polygon
 
     def paint(self, painter, option, widget):
-        # Body
         painter.setBrush(self.colour)
-        painter.drawEllipse(self.BoundingRect)
-        # Eyes
-        painter.setBrush(QtCore.Qt.white)
-        painter.drawEllipse(+8-4, -8-4, 8, 8)
-        painter.drawEllipse(-8-4, -8-4, 8, 8)
-        # Pupils
-        painter.setBrush(QtCore.Qt.black)
-        painter.drawEllipse(QtCore.QRectF(-8-2, -9-2, 4, 4))
-        painter.drawEllipse(QtCore.QRectF(+8-2, -9-2, 4, 4))
+        painter.drawRect(self.BoundingRect)
+        painter.drawPixmap(self.BoundingRect.toRect(),self.pixmap)
+        # # Body
+        # painter.setBrush(self.colour)
+        # painter.drawEllipse(self.BoundingRect)
+        # # Eyes
+        # painter.setBrush(QtCore.Qt.white)
+        # painter.drawEllipse(+8-4, -8-4, 8, 8)
+        # painter.drawEllipse(-8-4, -8-4, 8, 8)
+        # # Pupils
+        # painter.setBrush(QtCore.Qt.black)
+        # painter.drawEllipse(QtCore.QRectF(-8-2, -9-2, 4, 4))
+        # painter.drawEllipse(QtCore.QRectF(+8-2, -9-2, 4, 4))
 
