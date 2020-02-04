@@ -1,8 +1,8 @@
-# SocNav1
-A Dataset to Benchmark and Learn Social Navigation Conventions
+# HIdataSet
+A Dataset to Human Interaction
 
 
-**Contributors:** Luis J. Manso, Pilar Bachiller, Pedro Núñez, Luis V. Calderita, Diego R. Faria.
+**Contributors:** Luis J. Manso, Pilar Bachiller, Pedro Núñez, Luis V. Calderita, Diego R. Faria, Araceli Vega.
 
 [Shared under the Creative Commons CC-BY license](https://creativecommons.org/licenses/by/4.0/legalcode).
 
