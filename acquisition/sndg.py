@@ -162,6 +162,7 @@ class SNDG_APP(QtWidgets.QMainWindow):
 if __name__ == "__main__":
     import signal
     signal.signal( signal.SIGINT, signal.SIG_DFL )
+  
 
     app = QtWidgets.QApplication()
     QtCore.qsrand(QtCore.QTime(0, 0, 0).secsTo(QtCore.QTime.currentTime()))
@@ -170,6 +171,6 @@ if __name__ == "__main__":
     sndg.populateWorld()
     sndg.show()
 
-    # sndg.generateDataset(2500)
+    # sndg.generateDataset(250)
     # sys.exit()
     sys.exit(app.exec_())

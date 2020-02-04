@@ -14,7 +14,7 @@ class RegularObject(QtWidgets.QGraphicsItem):
         self.yPos = yPos
         self.setAngle(angle)
         self.setPos(self.xPos, self.yPos)
-        self.colour = QtCore.Qt.green
+        self.colour = QtCore.Qt.yellow
 
     @classmethod
     def from_json(RegularObject, json_data):

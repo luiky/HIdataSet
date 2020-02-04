@@ -12,27 +12,28 @@ class Robot(QtWidgets.QGraphicsItem):
         return Robot.BoundingRect
 
     def paint(self, painter, option, widget):
+        pass
         # Body
-        painter.setBrush(QtCore.Qt.red)
-        bodyPolygon = QtGui.QPolygon()
-        bodyPolygon.append(QtCore.QPoint(-20, 20))
-        bodyPolygon.append(QtCore.QPoint(-20, -13))
-        bodyPolygon.append(QtCore.QPoint(-13, -20))
+        # painter.setBrush(QtCore.Qt.red)
+        # bodyPolygon = QtGui.QPolygon()
+        # bodyPolygon.append(QtCore.QPoint(-20, 20))
+        # bodyPolygon.append(QtCore.QPoint(-20, -13))
+        # bodyPolygon.append(QtCore.QPoint(-13, -20))
 
-        bodyPolygon.append(QtCore.QPoint(13, -20))
-        bodyPolygon.append(QtCore.QPoint(20, -13))
-        bodyPolygon.append(QtCore.QPoint(20, 20))
+        # bodyPolygon.append(QtCore.QPoint(13, -20))
+        # bodyPolygon.append(QtCore.QPoint(20, -13))
+        # bodyPolygon.append(QtCore.QPoint(20, 20))
 
-        bodyPolygon.append(QtCore.QPoint(-20, 20))
-        painter.drawPolygon(bodyPolygon)
-        # Wheels
-        painter.setBrush(QtCore.Qt.black)
-        painter.drawRect(+18-4, -8, 8, 16)
-        painter.drawRect(-18-4, -8, 8, 16)
+        # bodyPolygon.append(QtCore.QPoint(-20, 20))
+        # painter.drawPolygon(bodyPolygon)
+        # # Wheels
+        # painter.setBrush(QtCore.Qt.black)
+        # painter.drawRect(+18-4, -8, 8, 16)
+        # painter.drawRect(-18-4, -8, 8, 16)
 
-        nosePolygon = QtGui.QPolygon()
-        nosePolygon.append(QtCore.QPoint(0, -22))
-        nosePolygon.append(QtCore.QPoint(-10, -15))
-        nosePolygon.append(QtCore.QPoint(10, -15))
-        nosePolygon.append(QtCore.QPoint(0, -22))
-        painter.drawPolygon(nosePolygon)
+        # nosePolygon = QtGui.QPolygon()
+        # nosePolygon.append(QtCore.QPoint(0, -22))
+        # nosePolygon.append(QtCore.QPoint(-10, -15))
+        # nosePolygon.append(QtCore.QPoint(10, -15))
+        # nosePolygon.append(QtCore.QPoint(0, -22))
+        # painter.drawPolygon(nosePolygon)

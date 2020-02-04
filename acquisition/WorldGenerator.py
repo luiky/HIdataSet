@@ -197,9 +197,9 @@ class WorldGenerator(QtWidgets.QGraphicsScene):
             l = [1,-1]
             option = random.choice (l)
             angle = human.angle+180 + (option*QtCore.qrand()%25)
-            print('angle human2:', angle)
+            # print('angle human2:', angle)
             if angle > 180.: angle = -360. + angle
-            print('angle human2 normalize:', angle)
+            # print('angle human2 normalize:', angle)
             human2 = Human(availableId, xPos, yPos, angle)
             if not self.room.containsPolygon(human2.polygon()):
                 dist -= 5
@@ -243,10 +243,8 @@ class WorldGenerator(QtWidgets.QGraphicsScene):
                 ww = QtCore.qrand()%800/4-400/4
                 hh = QtCore.qrand()%800/4-400/4
             if (ww>10 and hh>10):                
-                object = IrregularObject(availableId, xx, yy, ww, hh, (QtCore.qrand()%360)-180)
-            if object in self.irregularobjects:
-                    object = None                                                                  
-            if object is not None:                
+                object = IrregularObject(availableId, xx, yy, ww, hh, (QtCore.qrand()%360)-180)                     
+            if object is not None:                   
                 if not self.room.containsPolygon(object.polygon()):
                     object = None   
             
@@ -262,19 +260,15 @@ class WorldGenerator(QtWidgets.QGraphicsScene):
             self.humans = []
             self.objects = []
             self.interactions = []
+            self.objects =[]
             self.irregularobjects =[]
+            
 
 
             self.room = Room()
             self.addItem(self.room)
 
-            # We generate a number of humans using the absolute of a normal
-            # variate with mean 1, sigma 4, capped to 15. If it's 15 we get
-            # the remainder of /15
-            # humanCount = int(abs(random.normalvariate(1, 4))) % 15
-            # if humanCount == 0:
-            #     humanCount = QtCore.qrand() % 3
-            #solo dos humanos
+            #ONLY TWO HUMAN BEINGS
             human = self.generateHuman(availableId)
             availableId += 1
             self.addItem(human)
@@ -283,88 +277,62 @@ class WorldGenerator(QtWidgets.QGraphicsScene):
             while human2 is None:                
                 if QtCore.qrand()%2 == 0:
                     human2 = self.generateInteractuatorHuman(human, availableId)                                                                
-                    #necesito crear interaccion?
+                    #CHECK necesito crear interaccion?
                     # interaction = Interaction(human, human2)
                     # self.interactions.append(interaction)
                     # self.addItem(interaction)                    
                 else:
-                    human2 = self.generateHuman(availableId)
-                print ("-----", human.polygon(), human2.polygon())                
-                if human.polygon().intersects(human2.polygon()):
-                    print ('intersect')                    
+                    human2 = self.generateHuman(availableId)                
+                if human.polygon().intersects(human2.polygon()):                    
                     human2=None
             availableId += 1
             self.addItem(human2)
             self.humans.append(human2)
 
-            # #genero objetos   
-            # objectCount = int(abs(random.normalvariate(1, 4))) % 5
-            # print ("objectCount",objectCount)
-            # if objectCount == 0:
-            #     objectCount = QtCore.qrand() % 3
-            # for i in range(objectCount):
-            #     print (i)
-            #     object = self.generateObject(availableId)                  
-            #     availableId += 1
-            #     self.addItem(object)
-            #     self.objects.append(object)
-                
-            # print ("----A: len", len(self.objects))
-            # # print ("----A: self.objects", self.objects)
-
-            # #Deleting object intersects
-            # for object in self.objects:
-            #     print ("object.id", object.id)
-            #     for object2 in self.objects:
-            #         if object == object2:
-            #             pass
-            #         elif object.polygon().intersects(object2.polygon()):                        
-            #             print ("removing object")
-            #             print (object,object2)
-            #             self.objects.remove(object2)
-            #             self.removeItem(object2)
-            #             break
-            
-            #genero objetos   Irregulares
-            objectCount = int(abs(random.normalvariate(1, 4))) % 15
-            print ("irregular objects",objectCount)
+            #genero objetos  regulares 
+            objectCount = int(abs(random.normalvariate(1, 4))) % 5
+            #print ("objectCount",objectCount)
             if objectCount == 0:
                 objectCount = QtCore.qrand() % 3
             for i in range(objectCount):
-                print (i)
-                object = self.generateIrregularObject(availableId)                  
+                # print (i)
+                object = self.generateObject(availableId)                  
+                #Chequeo sino intersecta con otro objeto ya creado
+                if any (object.polygon().intersects(x.polygon()) for x in self.objects):                                 
+                    continue
+                #check is colide with human beings
+                if any (object.polygon().intersects(x.polygon()) for x in self.humans):                                                
+                    continue
+                   
+                availableId += 1
+                self.addItem(object)
+                self.objects.append(object)
+            
+            #genero objetos IRREGULARES
+            objectCount = int(abs(random.normalvariate(1, 4))) % 15
+            # print ("irregular objects",objectCount)
+            if objectCount == 0:
+                objectCount = QtCore.qrand() % 3
+
+            for i in range(objectCount):
+                # print (i)
+                object = self.generateIrregularObject(availableId)                
+                ##check if intersect with regular IRREGULARobjects
+                if any (object.polygon().intersects(x.polygon()) for x in self.irregularobjects):                                  
+                    continue
+                #check if intersect with humans
+                if any (object.polygon().intersects(x.polygon()) for x in self.humans):                                  
+                    continue
+                #check if intersect with regular objects
+                if any (object.polygon().intersects(x.polygon()) for x in self.objects):                                                      
+                    continue
+                   
                 availableId += 1
                 self.addItem(object)
                 self.irregularobjects.append(object)
-                
-            print ("----A: len", len(self.irregularobjects))
-            # print ("----A: self.objects", self.objects)
-
-            #Deleting object intersects
-            for object in self.irregularobjects:
-                print ("object.id", object.id)
-                for object2 in self.irregularobjects:
-                    if object == object2:
-                        pass
-                    elif object.polygon().intersects(object2.polygon()):                        
-                        print ("removing object")
-                        print (object,object2)
-                        self.irregularobjects.remove(object2)
-                        self.removeItem(object2)
-                        break
-
-
-            for object in self.irregularobjects:
-                print ("object.id", object.id)
-                for human in self.humans:
-                    if object.polygon().intersects(human.polygon()):                        
-                        print ("removing object")
-                        print (object)
-                        self.irregularobjects.remove(object)
-                        self.removeItem(object)                        
             
-            # print ("----B: self.objects",self.objects)
-            print ("----B: len", len(self.objects))
+            print ("----Sel.irregularobjets: len", len(self.irregularobjects))                        
+            print ("----Self.objects: len", len(self.objects))
             self.robot = Robot()
             self.robot.setPos(0, 0)
             self.addItem(self.robot)

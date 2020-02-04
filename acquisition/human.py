@@ -18,7 +18,7 @@ class Human(QtWidgets.QGraphicsItem):
         self.setZValue(1)
         self.colour = QtCore.Qt.transparent
         self.pixmap = QtGui.QPixmap("person.png")
-        self.factor = 1.5 #multiplicar tamaño
+        self.factor = 1.5 #multiplicar tamaño del poligono, para estar acorde con el boundingrect
 
     @classmethod
     def from_json(Human, json_data):
@@ -52,7 +52,7 @@ class Human(QtWidgets.QGraphicsItem):
 
     def paint(self, painter, option, widget):
         painter.setBrush(self.colour)
-        painter.drawRect(self.BoundingRect)
+        # painter.drawRect(self.BoundingRect)
         painter.drawPixmap(self.BoundingRect.toRect(),self.pixmap)
         # # Body
         # painter.setBrush(self.colour)
