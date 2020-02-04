@@ -33,7 +33,7 @@ class SNDG_APP(QtWidgets.QMainWindow):
         self.ui.graphicsView.show()
         self.ui.graphicsView.setRenderHint(QtGui.QPainter.Antialiasing)
         self.ui.graphicsView.setViewportUpdateMode(QtWidgets.QGraphicsView.BoundingRectViewportUpdate)
-        self.labels = [ self.ui.label0, self.ui.label1, self.ui.label2, self.ui.label3, self.ui.label4, self.ui.label5 ]
+        self.labels = [ self.ui.label0, self.ui.label1, self.ui.label2]
 
         self.dataset = None
         if len(args) == 1:
@@ -53,7 +53,7 @@ class SNDG_APP(QtWidgets.QMainWindow):
         for i, label in zip(range(len(self.labels)), self.labels):
             v = 1.-math.fabs(i-value)
             if v < 0: v = 0
-            label.setStyleSheet('color: rgba(0, 0, 0, {});'.format(v))
+            label.setStyleSheet('color: rgba(0, 0, 0, {});'.format(v))            
         self.ui.sendButton.setEnabled(True)
 
 
@@ -171,6 +171,6 @@ if __name__ == "__main__":
     sndg.populateWorld()
     sndg.show()
 
-    # sndg.generateDataset(250)
+    # sndg.generateDataset(10)
     # sys.exit()
     sys.exit(app.exec_())

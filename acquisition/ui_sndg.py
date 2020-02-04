@@ -49,32 +49,16 @@ class Ui_MainWindow(object):
         self.horizontalLayout_3.setObjectName(u"horizontalLayout_3")
         self.verticalLayout_3 = QVBoxLayout()
         self.verticalLayout_3.setObjectName(u"verticalLayout_3")
-        self.label5 = QLabel(self.centralwidget)
-        self.label5.setObjectName(u"label5")
-        self.label5.setStyleSheet(u"color: rgba(0, 0, 0, 0.);")
-
-        self.verticalLayout_3.addWidget(self.label5)
-
-        self.label4 = QLabel(self.centralwidget)
-        self.label4.setObjectName(u"label4")
-        self.label4.setStyleSheet(u"color: rgba(0, 0, 0, 0.);")
-
-        self.verticalLayout_3.addWidget(self.label4)
-
-        self.label3 = QLabel(self.centralwidget)
-        self.label3.setObjectName(u"label3")
-        self.label3.setStyleSheet(u"color: rgba(0, 0, 0, 0.);")
-
-        self.verticalLayout_3.addWidget(self.label3)
-
         self.label2 = QLabel(self.centralwidget)
         self.label2.setObjectName(u"label2")
+        self.label2.setEnabled(True)
         self.label2.setStyleSheet(u"color: rgba(0, 0, 0, 0.);")
 
         self.verticalLayout_3.addWidget(self.label2)
 
         self.label1 = QLabel(self.centralwidget)
         self.label1.setObjectName(u"label1")
+        self.label1.setEnabled(True)
         self.label1.setStyleSheet(u"color: rgba(0, 0, 0, 0.);")
 
         self.verticalLayout_3.addWidget(self.label1)
@@ -151,11 +135,8 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"Social Navigation Dataset Generator", None))
         self.label.setText(QCoreApplication.translate("MainWindow", u"Interaction level", None))
-        self.label5.setText(QCoreApplication.translate("MainWindow", u"total", None))
-        self.label4.setText(QCoreApplication.translate("MainWindow", u"very high", None))
-        self.label3.setText(QCoreApplication.translate("MainWindow", u"high", None))
-        self.label2.setText(QCoreApplication.translate("MainWindow", u"acceptable", None))
-        self.label1.setText(QCoreApplication.translate("MainWindow", u"Low", None))
+        self.label2.setText(QCoreApplication.translate("MainWindow", u"High", None))
+        self.label1.setText(QCoreApplication.translate("MainWindow", u"Media", None))
         self.label0.setText(QCoreApplication.translate("MainWindow", u"None", None))
         self.sendButton.setText(QCoreApplication.translate("MainWindow", u"send\n"
 "context\n"

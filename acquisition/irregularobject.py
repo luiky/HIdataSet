@@ -26,8 +26,8 @@ class IrregularObject(QtWidgets.QGraphicsItem):
         id = json_data['id']
         xPos = json_data['xPos']
         yPos = json_data['yPos']
-        w = json_data['xPos']
-        h = json_data['yPos']
+        w = json_data['w']
+        h = json_data['h']
         angle = json_data['orientation']
         return IrregularObject(id, xPos, yPos, w, h, angle)
 

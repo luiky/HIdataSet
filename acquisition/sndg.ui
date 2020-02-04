@@ -50,52 +50,28 @@
           <item>
            <layout class="QVBoxLayout" name="verticalLayout_3">
             <item>
-             <widget class="QLabel" name="label5">
-              <property name="styleSheet">
-               <string notr="true">color: rgba(0, 0, 0, 0.);</string>
-              </property>
-              <property name="text">
-               <string>total</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLabel" name="label4">
-              <property name="styleSheet">
-               <string notr="true">color: rgba(0, 0, 0, 0.);</string>
-              </property>
-              <property name="text">
-               <string>very high</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLabel" name="label3">
-              <property name="styleSheet">
-               <string notr="true">color: rgba(0, 0, 0, 0.);</string>
-              </property>
-              <property name="text">
-               <string>high</string>
-              </property>
-             </widget>
-            </item>
-            <item>
              <widget class="QLabel" name="label2">
+              <property name="enabled">
+               <bool>true</bool>
+              </property>
               <property name="styleSheet">
                <string notr="true">color: rgba(0, 0, 0, 0.);</string>
               </property>
               <property name="text">
-               <string>acceptable</string>
+               <string>High</string>
               </property>
              </widget>
             </item>
             <item>
              <widget class="QLabel" name="label1">
+              <property name="enabled">
+               <bool>true</bool>
+              </property>
               <property name="styleSheet">
                <string notr="true">color: rgba(0, 0, 0, 0.);</string>
               </property>
               <property name="text">
-               <string>Low</string>
+               <string>Media</string>
               </property>
              </widget>
             </item>

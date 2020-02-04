@@ -62,6 +62,13 @@ class WorldGenerator(QtWidgets.QGraphicsScene):
                 self.interactions.append(interaction)
                 self.addItem(interaction)
 
+        self.irregularobjects = []
+        for raw_irregularobjects in data['irregularobjects']:
+            obj = IrregularObject.from_json(raw_irregularobjects)
+            self.addItem(obj)
+            self.irregularobjects.append(obj)
+            idMap[raw_irregularobjects['id']] = obj
+
 
         self.robot = Robot()
         self.robot.setPos(0, 0)
@@ -123,6 +130,18 @@ class WorldGenerator(QtWidgets.QGraphicsScene):
             structure['links'].append( [interaction.a.id, interaction.b.id, 'interact'] )
             if type(interaction.b) is Human:
                 structure['links'].append( [interaction.b.id, interaction.a.id, 'interact'] )
+
+        irregularObjectsList = []
+        for object in self.irregularobjects:
+            o = dict()
+            o['id'] = object.id
+            o['xPos'] = +object.xPos
+            o['yPos'] = +object.yPos             
+            o['w'] = +object.w             
+            o['h'] = +object.h
+            o['orientation'] = +object.angle
+            irregularObjectsList.append(o)
+        structure['irregularobjects'] = irregularObjectsList
 
         structure['room'] = [ [+point.x(), point.y()] for point in self.room.poly ]
 
@@ -259,11 +278,8 @@ class WorldGenerator(QtWidgets.QGraphicsScene):
             self.clear()
             self.humans = []
             self.objects = []
-            self.interactions = []
-            self.objects =[]
-            self.irregularobjects =[]
-            
-
+            self.interactions = []            
+            self.irregularobjects =[]            
 
             self.room = Room()
             self.addItem(self.room)
@@ -331,15 +347,15 @@ class WorldGenerator(QtWidgets.QGraphicsScene):
                 self.addItem(object)
                 self.irregularobjects.append(object)
             
-            print ("----Sel.irregularobjets: len", len(self.irregularobjects))                        
-            print ("----Self.objects: len", len(self.objects))
+            #print ("----Sel.irregularobjets: len", len(self.irregularobjects))                        
+            #print ("----Self.objects: len", len(self.objects))
             self.robot = Robot()
             self.robot.setPos(0, 0)
             self.addItem(self.robot)
 
 
 
-        self.text = 'Humans:' + str(len(self.humans)) + ' ' + 'Objects:' + str(len(self.objects))
+        self.text = 'Humans:' + str(len(self.humans)) + ' ' + 'Objects:' + str(len(self.objects))+ ' ' + 'Irregular Objects:' + str(len(self.irregularobjects))
 
 
 
