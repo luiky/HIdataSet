@@ -1,4 +1,5 @@
 import math
+import random
 
 from PySide2 import QtCore, QtGui, QtWidgets
 
@@ -16,7 +17,10 @@ class IrregularObject(QtWidgets.QGraphicsItem):
         self.h = h
         self.setAngle(angle)
         self.setPos(self.xPos, self.yPos)
-        self.colour = QtCore.Qt.green
+        self.alto = int(QtCore.qrand()%255)
+        # print ("random alto" , self.alto)  
+              
+        self.colour = QtGui.QColor(0,0,0,self.alto) #QtCore.Qt.green        
         #self.BoundingRect =QtCore.QRectF(-20, -20, 40, 40)
         self.BoundingRect =QtCore.QRectF(-w, -h, w*2, h*2)
         
@@ -56,8 +60,8 @@ class IrregularObject(QtWidgets.QGraphicsItem):
         return self.BoundingRect
 
     def paint(self, painter, option, widget):
-        # Body
-        painter.setBrush(self.colour)
-        painter.drawRect(self.BoundingRect)
+        # Body     
+        # painter.setBrush(QtGui.QColor(0,0,0,200))
+        painter.setBrush(self.colour)        
         painter.drawRect(self.BoundingRect)
 

@@ -306,23 +306,23 @@ class WorldGenerator(QtWidgets.QGraphicsScene):
             self.humans.append(human2)
 
             #genero objetos  regulares 
-            objectCount = int(abs(random.normalvariate(1, 4))) % 5
-            #print ("objectCount",objectCount)
-            if objectCount == 0:
-                objectCount = QtCore.qrand() % 3
-            for i in range(objectCount):
-                # print (i)
-                object = self.generateObject(availableId)                  
-                #Chequeo sino intersecta con otro objeto ya creado
-                if any (object.polygon().intersects(x.polygon()) for x in self.objects):                                 
-                    continue
-                #check is colide with human beings
-                if any (object.polygon().intersects(x.polygon()) for x in self.humans):                                                
-                    continue
+            # objectCount = int(abs(random.normalvariate(1, 4))) % 5
+            # #print ("objectCount",objectCount)
+            # if objectCount == 0:
+            #     objectCount = QtCore.qrand() % 3
+            # for i in range(objectCount):
+            #     # print (i)
+            #     object = self.generateObject(availableId)                  
+            #     #Chequeo sino intersecta con otro objeto ya creado
+            #     if any (object.polygon().intersects(x.polygon()) for x in self.objects):                                 
+            #         continue
+            #     #check is colide with human beings
+            #     if any (object.polygon().intersects(x.polygon()) for x in self.humans):                                                
+            #         continue
                    
-                availableId += 1
-                self.addItem(object)
-                self.objects.append(object)
+            #     availableId += 1
+            #     self.addItem(object)
+            #     self.objects.append(object)
             
             #genero objetos IRREGULARES
             objectCount = int(abs(random.normalvariate(1, 4))) % 15

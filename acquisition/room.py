@@ -6,8 +6,8 @@ from polygonmisc import translatePolygon, movePolygon
 
 
 def getRectRoom():
-    w = min(10, abs(random.normalvariate(1.5, 2.5))+1.5)/2 * 100
-    h = min(10, abs(random.normalvariate(3.0, 2.5))+4.0)/2 * 100
+    w = min(10, abs(random.normalvariate(1.5, 2.5))+1.5)/2 * 100/1.5
+    h = min(10, abs(random.normalvariate(3.0, 2.5))+4.0)/2 * 100/1.5
     polygon = QtGui.QPolygon()
     polygon.append( QtCore.QPoint(-w, -h) )
     polygon.append( QtCore.QPoint(-w, +h) )
@@ -68,6 +68,8 @@ class Room(QtWidgets.QGraphicsItem):
         return self.poly.boundingRect()
 
     def paint(self, painter, option, widget):
+        # myBrush = QtGui.QBrush(QtCore.Qt.lightGray,QtCore.Qt.CrossPattern)
+        # painter.setBrush(myBrush)
         painter.drawPolygon(self.poly)        
 
     def containsPolygon(self, p):
