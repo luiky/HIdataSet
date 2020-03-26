@@ -279,7 +279,7 @@ class WorldGenerator(QtWidgets.QGraphicsScene):
             self.humans = []
             self.objects = []
             self.interactions = []            
-            self.irregularobjects =[]            
+            #self.irregularobjects =[]            
 
             self.room = Room()
             self.addItem(self.room)
@@ -325,27 +325,27 @@ class WorldGenerator(QtWidgets.QGraphicsScene):
             #     self.objects.append(object)
             
             #genero objetos IRREGULARES
-            objectCount = int(abs(random.normalvariate(1, 4))) % 15
-            # print ("irregular objects",objectCount)
-            if objectCount == 0:
-                objectCount = QtCore.qrand() % 3
+            #objectCount = int(abs(random.normalvariate(1, 4))) % 15
+            ## print ("irregular objects",objectCount)
+            #if objectCount == 0:
+                #objectCount = QtCore.qrand() % 3
 
-            for i in range(objectCount):
-                # print (i)
-                object = self.generateIrregularObject(availableId)                
-                ##check if intersect with regular IRREGULARobjects
-                if any (object.polygon().intersects(x.polygon()) for x in self.irregularobjects):                                  
-                    continue
-                #check if intersect with humans
-                if any (object.polygon().intersects(x.polygon()) for x in self.humans):                                  
-                    continue
-                #check if intersect with regular objects
-                if any (object.polygon().intersects(x.polygon()) for x in self.objects):                                                      
-                    continue
+            #for i in range(objectCount):
+                ## print (i)
+                #object = self.generateIrregularObject(availableId)                
+                ###check if intersect with regular IRREGULARobjects
+                #if any (object.polygon().intersects(x.polygon()) for x in self.irregularobjects):                                  
+                    #continue
+                ##check if intersect with humans
+                #if any (object.polygon().intersects(x.polygon()) for x in self.humans):                                  
+                    #continue
+                ##check if intersect with regular objects
+                #if any (object.polygon().intersects(x.polygon()) for x in self.objects):                                                      
+                    #continue
                    
-                availableId += 1
-                self.addItem(object)
-                self.irregularobjects.append(object)
+                #availableId += 1
+                #self.addItem(object)
+                #self.irregularobjects.append(object)
             
             #print ("----Sel.irregularobjets: len", len(self.irregularobjects))                        
             #print ("----Self.objects: len", len(self.objects))
@@ -355,7 +355,7 @@ class WorldGenerator(QtWidgets.QGraphicsScene):
 
 
 
-        self.text = 'Humans:' + str(len(self.humans)) + ' ' + 'Objects:' + str(len(self.objects))+ ' ' + 'Irregular Objects:' + str(len(self.irregularobjects))
+        #self.text = 'Humans:' + str(len(self.humans)) + ' ' + 'Objects:' + str(len(self.objects))+ ' ' + 'Irregular Objects:' + str(len(self.irregularobjects))
 
 
 
