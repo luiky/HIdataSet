@@ -11,7 +11,7 @@ class Robot(QtWidgets.QGraphicsItem):
     def boundingRect(self):
         return Robot.BoundingRect
 
-    def paint(self, painter, option, widget):
+    def paint(self, painter, option, widget):        
         pass
         # Body
         # painter.setBrush(QtCore.Qt.red)

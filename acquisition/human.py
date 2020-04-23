@@ -53,7 +53,7 @@ class Human(QtWidgets.QGraphicsItem):
     def paint(self, painter, option, widget):
         painter.setBrush(self.colour)
         # painter.drawRect(self.BoundingRect)
-        painter.drawPixmap(self.BoundingRect.toRect(),self.pixmap)
+        painter.drawPixmap(self.BoundingRect.toRect(),self.pixmap)        
         # # Body
         # painter.setBrush(self.colour)
         # painter.drawEllipse(self.BoundingRect)

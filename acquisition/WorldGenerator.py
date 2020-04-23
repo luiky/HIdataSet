@@ -85,7 +85,7 @@ class WorldGenerator(QtWidgets.QGraphicsScene):
                 done = True
                 # print(time.time()-self.generation_time)
             except RuntimeError:
-                pass
+                pass        
 
     @staticmethod
     def distanceTo(something):
@@ -131,17 +131,17 @@ class WorldGenerator(QtWidgets.QGraphicsScene):
             if type(interaction.b) is Human:
                 structure['links'].append( [interaction.b.id, interaction.a.id, 'interact'] )
 
-        irregularObjectsList = []
-        for object in self.irregularobjects:
-            o = dict()
-            o['id'] = object.id
-            o['xPos'] = +object.xPos
-            o['yPos'] = +object.yPos             
-            o['w'] = +object.w             
-            o['h'] = +object.h
-            o['orientation'] = +object.angle
-            irregularObjectsList.append(o)
-        structure['irregularobjects'] = irregularObjectsList
+        #irregularObjectsList = []
+        #for object in self.irregularobjects:
+            #o = dict()
+            #o['id'] = object.id
+            #o['xPos'] = +object.xPos
+            #o['yPos'] = +object.yPos             
+            #o['w'] = +object.w             
+            #o['h'] = +object.h
+            #o['orientation'] = +object.angle
+            #irregularObjectsList.append(o)
+        #structure['irregularobjects'] = irregularObjectsList
 
         structure['room'] = [ [+point.x(), point.y()] for point in self.room.poly ]
 

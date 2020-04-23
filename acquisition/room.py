@@ -70,7 +70,7 @@ class Room(QtWidgets.QGraphicsItem):
     def paint(self, painter, option, widget):
         # myBrush = QtGui.QBrush(QtCore.Qt.lightGray,QtCore.Qt.CrossPattern)
         # painter.setBrush(myBrush)
-        painter.drawPolygon(self.poly)        
+        painter.drawPolygon(self.poly)         
 
     def containsPolygon(self, p):
         poly2 = self.poly.united(p)        
