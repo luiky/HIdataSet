@@ -63,9 +63,10 @@ class SNDG_APP(QtWidgets.QMainWindow):
         textVal = str(self.ui.slider.value()).zfill(3)
         self.ui.statusbar.showMessage("send" + textVal)
         self.ui.sendButton.setEnabled(False)
-        self.world.serialize(self.ui.slider.value())
+        s= self.world.serialize(self.ui.slider.value())
         if self.savePix:
             myPixmap = QtWidgets.QWidget.grab(self.ui.graphicsView)
+            myPixmap.save(s['identifier']+".png")
             myPixmap.save(str(self.world.ds_identifier).zfill(5)+ " A"+".png")
         self.on_getButton_clicked()
         
@@ -178,6 +179,6 @@ if __name__ == "__main__":
     sndg.show()
     
     #True means store the pixmap when generate a Dataset. False not store    
-    #sndg.generateDataset(10,False)
+    sndg.generateDataset(10,False)
     # sys.exit()
     sys.exit(app.exec_())
