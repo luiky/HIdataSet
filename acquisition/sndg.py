@@ -66,8 +66,7 @@ class SNDG_APP(QtWidgets.QMainWindow):
         s= self.world.serialize(self.ui.slider.value())
         if self.savePix:
             myPixmap = QtWidgets.QWidget.grab(self.ui.graphicsView)
-            myPixmap.save(s['identifier']+".png")
-            myPixmap.save(str(self.world.ds_identifier).zfill(5)+ " A"+".png")
+            myPixmap.save(s['identifier']+".png")            
         self.on_getButton_clicked()
         
 
@@ -178,7 +177,8 @@ if __name__ == "__main__":
     sndg.populateWorld()
     sndg.show()
     
+    
     #True means store the pixmap when generate a Dataset. False not store    
-    sndg.generateDataset(10,False)
+    #sndg.generateDataset(10,True) #uncomment to generate a Dataset.
     # sys.exit()
     sys.exit(app.exec_())

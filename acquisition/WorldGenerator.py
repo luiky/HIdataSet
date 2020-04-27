@@ -62,12 +62,12 @@ class WorldGenerator(QtWidgets.QGraphicsScene):
                 self.interactions.append(interaction)
                 self.addItem(interaction)
 
-        self.irregularobjects = []
-        for raw_irregularobjects in data['irregularobjects']:
-            obj = IrregularObject.from_json(raw_irregularobjects)
-            self.addItem(obj)
-            self.irregularobjects.append(obj)
-            idMap[raw_irregularobjects['id']] = obj
+        #self.irregularobjects = []
+        #for raw_irregularobjects in data['irregularobjects']:
+            #obj = IrregularObject.from_json(raw_irregularobjects)
+            #self.addItem(obj)
+            #self.irregularobjects.append(obj)
+            #idMap[raw_irregularobjects['id']] = obj
 
 
         self.robot = Robot()
