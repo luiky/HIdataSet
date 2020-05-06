@@ -2,17 +2,31 @@ import math
 
 from PySide2 import QtCore, QtGui, QtWidgets
 
-class Robot(QtWidgets.QGraphicsItem):
+class MidPoint(QtWidgets.QGraphicsItem):
     BoundingRect = QtCore.QRectF(-20, -20, 40, 40)
 
     def __init__(self):
-        super(Robot, self).__init__()
+        super(MidPoint, self).__init__()
 
     def boundingRect(self):
-        return Robot.BoundingRect
+        return MidPoint.BoundingRect
 
+    def setDist (self, dist):
+        self.dist=dist
+    def setMidPoint (self, p):
+        self.midPoint=p
+    def setHumansPoints(self,p1,p2):
+        self.human_point1=p1
+        self.human_point2=p2        
+    
     def paint(self, painter, option, widget):        
-        pass       
+        #pass
+        painter.setBrush(QtCore.Qt.red)        
+        if (self.dist >65 ):
+            text = f"{self.dist/100:.2f}" #truncate float to 2 decimal
+            painter.drawText(self.midPoint,text+'m')
+        painter.drawLine(self.human_point1,self.human_point2)
+        
         # Body
         # painter.setBrush(QtCore.Qt.red)
         # bodyPolygon = QtGui.QPolygon()

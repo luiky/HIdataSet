@@ -68,8 +68,8 @@ class Room(QtWidgets.QGraphicsItem):
         return self.poly.boundingRect()
 
     def paint(self, painter, option, widget):
-        # myBrush = QtGui.QBrush(QtCore.Qt.lightGray,QtCore.Qt.CrossPattern)
-        # painter.setBrush(myBrush)
+        #myBrush = QtGui.QBrush(QtCore.Qt.lightGray,QtCore.Qt.CrossPattern)
+        #painter.setBrush(myBrush)
         painter.drawPolygon(self.poly)         
 
     def containsPolygon(self, p):

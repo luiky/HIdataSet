@@ -176,9 +176,10 @@ if __name__ == "__main__":
     app.installEventFilter(sndg)
     sndg.populateWorld()
     sndg.show()
-    
-    
+        
     #True means store the pixmap when generate a Dataset. False not store    
-    #sndg.generateDataset(10,True) #uncomment to generate a Dataset.
+    #uncomment to generate a Dataset.
+    #sndg.generateDataset(10,False) 
+    
     # sys.exit()
     sys.exit(app.exec_())

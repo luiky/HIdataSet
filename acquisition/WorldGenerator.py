@@ -1,5 +1,5 @@
 import random
-import math
+import math, numpy
 import json
 import time
 
@@ -7,6 +7,7 @@ from PySide2 import QtCore, QtGui, QtWidgets
 
 from human import Human
 from robot import Robot
+from midPoint import MidPoint
 from regularobject import RegularObject
 from irregularobject import IrregularObject
 from room import Room
@@ -304,6 +305,29 @@ class WorldGenerator(QtWidgets.QGraphicsScene):
             availableId += 1
             self.addItem(human2)
             self.humans.append(human2)
+            
+            # Calculamos el punto medio de los dos humanos. Adri
+            x1 = human.xPos
+            y1 = human.yPos
+            x2 = human2.xPos
+            y2 = human2.yPos
+            x_pm = (x1 + x2)/2 
+            y_pm = (y1 + y2)/2 
+            punto_medio = QtCore.QPointF(x_pm, y_pm) # Coordenada x e y.
+            punto_human = QtCore.QPointF(x1, y1) # Coordenada humano 1
+            punto_human2 = QtCore.QPointF(x2, y2) # Coordenada humano 2.  
+            
+            a = numpy.array((x1 ,y1))
+            b = numpy.array((x2, y2))
+            dist = numpy.linalg.norm(a-b)
+            
+            self.midPoint = MidPoint()            
+            self.midPoint.setHumansPoints(punto_human,punto_human2)
+            self.midPoint.setMidPoint(punto_medio)
+            self.midPoint.setDist(dist)
+            self.addItem(self.midPoint)
+
+            
 
             #genero objetos  regulares 
             # objectCount = int(abs(random.normalvariate(1, 4))) % 5
