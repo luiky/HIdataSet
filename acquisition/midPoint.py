@@ -21,11 +21,25 @@ class MidPoint(QtWidgets.QGraphicsItem):
     
     def paint(self, painter, option, widget):        
         #pass
-        painter.setBrush(QtCore.Qt.red)        
+        #painter.setBrush(QtCore.Qt.red)        
+        
+        line = QtCore.QLineF(self.human_point1,self.human_point2)
+        painter.drawLine(line)
+                
         if (self.dist >65 ):
+            font = painter.font()
+            font.setPixelSize(22)
+            painter.setFont(font)
             text = f"{self.dist/100:.2f}" #truncate float to 2 decimal
-            painter.drawText(self.midPoint,text+'m')
-        painter.drawLine(self.human_point1,self.human_point2)
+            painter.drawText(self.midPoint,text+'m')        
+        
+        #punto_medio = QtCore.QPointF(x_pm, y_pm) # Coordenada x e y.
+
+        #angleline = QtCore.QLineF()
+        #angleline.setP1(self.midPoint)
+        #angleline.setAngle(angleline.angleTo(line))                  
+        #painter.drawLine(angleline)
+        #print("angleTo",angleline.angleTo(line))
         
         # Body
         # painter.setBrush(QtCore.Qt.red)

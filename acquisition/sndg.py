@@ -179,7 +179,7 @@ if __name__ == "__main__":
         
     #True means store the pixmap when generate a Dataset. False not store    
     #uncomment to generate a Dataset.
-    #sndg.generateDataset(10,False) 
+    sndg.generateDataset(20,True) 
     
     # sys.exit()
     sys.exit(app.exec_())
