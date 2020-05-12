@@ -5,7 +5,7 @@ import time
 
 from PySide2 import QtCore, QtGui, QtWidgets
 
-from human import Human
+from human import Human, Head
 from robot import Robot
 from midPoint import MidPoint
 from regularobject import RegularObject
@@ -45,6 +45,13 @@ class WorldGenerator(QtWidgets.QGraphicsScene):
             self.humans.append(human)
             idMap[raw_human['id']] = human
 
+        self.heads = []
+        for raw_head in data['heads']:
+            head = Head.from_json(raw_head)
+            self.addItem(head)
+            self.heads.append(head)
+            idMap[raw_head['id']] = head
+            
         self.objects = []
         for raw_object in data['objects']:
             obj = RegularObject.from_json(raw_object)
@@ -113,8 +120,19 @@ class WorldGenerator(QtWidgets.QGraphicsScene):
             h['xPos'] = +human.xPos
             h['yPos'] = +human.yPos
             h['orientation'] = +human.angle
+            h['head_orientation'] = +human.angleHead
             humansList.append(h)
         structure['humans'] = humansList
+        
+        headsList = []
+        for head in self.heads:
+            h = dict()
+            h['id'] = head.id
+            h['xPos'] = +head.xPos
+            h['yPos'] = +head.yPos
+            h['orientation'] = +head.angle
+            headsList.append(h)
+        structure['heads'] = headsList
 
         objectsList = []
         for object in self.objects:
@@ -161,8 +179,11 @@ class WorldGenerator(QtWidgets.QGraphicsScene):
                 yy = int(random.normalvariate(0, 150))
             else:
                 xx = QtCore.qrand()%800-400
-                yy = QtCore.qrand()%800-400
-            human = Human(availableId, xx, yy, (QtCore.qrand()%360)-180)
+                yy = QtCore.qrand()%800-400                
+            
+            angleHuman = (QtCore.qrand()%360)-180
+            angleHead = angleHuman + random.choice([-1,1])*QtCore.qrand()%100
+            human = Human(availableId, xx, yy, angleHuman, angleHead)
             if not self.room.containsPolygon(human.polygon()):
                 human = None
         return human
@@ -185,6 +206,17 @@ class WorldGenerator(QtWidgets.QGraphicsScene):
                     dist = float(QtCore.qrand()%300+50)
                 human2 = None
         return human2
+    
+    #def generateHumanHead(self, human):
+        #head = None
+        #while head is None:
+            ##print ("human.angle", human.angle)
+            #angle = human.angle + random.choice([-1,1])*QtCore.qrand()%100                                    
+            #if angle > 180.: angle = -360. + angle            
+            #if angle < -180.: angle = angle + 360
+            #head = Head(human.id, human.xPos, human.yPos, angle)
+            ##if -180 <= a <= 180:            
+        #return head
 
     def generateComplementaryObject(self, human, availableId):
         a = math.pi*human.angle/180.
@@ -220,7 +252,8 @@ class WorldGenerator(QtWidgets.QGraphicsScene):
             # print('angle human2:', angle)
             if angle > 180.: angle = -360. + angle
             # print('angle human2 normalize:', angle)
-            human2 = Human(availableId, xPos, yPos, angle)
+            angleHead = angle + random.choice([-1,1])*QtCore.qrand()%100
+            human2 = Human(availableId, xPos, yPos, angle,angleHead)
             if not self.room.containsPolygon(human2.polygon()):
                 dist -= 5
                 if dist < 20:
@@ -278,6 +311,7 @@ class WorldGenerator(QtWidgets.QGraphicsScene):
             regenerateScene = False
             self.clear()
             self.humans = []
+            self.heads = []
             self.objects = []
             self.interactions = []            
             #self.irregularobjects =[]            
@@ -287,9 +321,16 @@ class WorldGenerator(QtWidgets.QGraphicsScene):
 
             #ONLY TWO HUMAN BEINGS
             human = self.generateHuman(availableId)
+            head = Head (human.id, human.xPos, human.yPos, human.angleHead )
+            #head = self.generateHumanHead(human)
             availableId += 1
             self.addItem(human)
             self.humans.append(human)
+            
+            #heads
+            self.addItem(head)
+            #self.heads.append(head)
+            
             human2 = None
             while human2 is None:                
                 if QtCore.qrand()%2 == 0:
@@ -302,9 +343,16 @@ class WorldGenerator(QtWidgets.QGraphicsScene):
                     human2 = self.generateHuman(availableId)                
                 if human.polygon().intersects(human2.polygon()):                    
                     human2=None
+                    
+            head2 = Head (human2.id, human2.xPos, human2.yPos, human2.angleHead )
+            #head2 = self.generateHumanHead(human2)
+            #print ("-----")
             availableId += 1
             self.addItem(human2)
             self.humans.append(human2)
+            #heads
+            self.addItem(head2)
+            #self.heads.append(head2)
             
             # Calculamos el punto medio de los dos humanos. Adri
             x1 = human.xPos
